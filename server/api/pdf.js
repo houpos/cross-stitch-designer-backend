@@ -37,9 +37,8 @@ async function printPDF(projectDetails) {
   return pdf;
 }
 
-router.get("/", async (req, res, next) => {
-  console.log("request", req.query.grid);
-  const pdf = await printPDF(req.query);
+router.post("/", async (req, res, next) => {
+  const pdf = await printPDF(req.body);
   res.set({ "Content-Type": "application/pdf", "Content-Length": pdf.length });
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.send(pdf);
